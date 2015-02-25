@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+  <servlet>
+    <servlet-name>SignUp</servlet-name>
+    <servlet-class>Servlet.SignUp</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LogIn</servlet-name>
+    <servlet-class>Servlet.LogIn</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetMarkerListByBound</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.GetMarkerListByBound</servlet-class>
+  </servlet>
+
+
+
+  <servlet-mapping>
+    <servlet-name>SignUp</servlet-name>
+    <url-pattern>/SignUp</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LogIn</servlet-name>
+    <url-pattern>/LogIn</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetMarkerListByBound</servlet-name>
+    <url-pattern>/GetMarkerListByBound</url-pattern>
+  </servlet-mapping>
+
+</web-app>

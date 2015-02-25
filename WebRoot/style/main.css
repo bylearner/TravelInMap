@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+body {
+	background-color:rgb(237,240,245);
+}
+#header {
+    background-color:rgb(58,87,149);
+    color:white;
+    padding:5px;
+	margin:0px;
+
+	font-size:20px;
+}
+#footer {
+    background-color:rgb(58,87,149);
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+}
+
