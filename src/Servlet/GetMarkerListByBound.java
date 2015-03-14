@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.*;
 
 import JavaBean.DataBean;
+import JavaBean.MarkerBean;
 
 public class GetMarkerListByBound extends HttpServlet {
 
@@ -50,43 +51,19 @@ public class GetMarkerListByBound extends HttpServlet {
 		float boundNorthEastLng = Float.parseFloat(request.getParameter("boundNorthEastLng"));
 		float boundSouthWestLat = Float.parseFloat(request.getParameter("boundSouthWestLat"));
 		float boundSouthWestLng = Float.parseFloat(request.getParameter("boundSouthWestLng"));
-		float boundCenterLat = Float.parseFloat(request.getParameter("boundCenterLat"));
-		float boundCenterLng = Float.parseFloat(request.getParameter("boundCenterLng"));
 		
 		DataBean db = new DataBean();
-
-		JSONObject story1 = new JSONObject();
-		story1.put("lat", new Float(40.44));
-		story1.put("lng", new Float(112.144));
-		story1.put("title", "place one");
-		story1.put("id", new Integer(12));
-		
-		JSONObject story2 = new JSONObject();
-		story2.put("lat", new Float(41.44));
-		story2.put("lng", new Float(119.144));
-		story2.put("title", "place two");
-		story2.put("id", new Integer(13));
-		
-		JSONObject story3 = new JSONObject();
-		story3.put("lat", new Float(39.44));
-		story3.put("lng", new Float(119.144));
-		story3.put("title", "place three");
-		story3.put("id", new Integer(14));
-		
-		ArrayList<JSONObject> storyListAll = new ArrayList<JSONObject>();
-		storyListAll.add(story1);
-		storyListAll.add(story2);
-		storyListAll.add(story3);
+		ArrayList<MarkerBean> markerList = db.getMarkerListByBound(boundNorthEastLat, boundNorthEastLng, boundSouthWestLat, boundSouthWestLng);
 		JSONArray storyList = new JSONArray();
-		for (int i=0; i<storyListAll.size();i++){
-			//System.out.println(storyListAll.get(i).get("lat"));
-			//if(storyListAll.get(i).get("lat")<=boundNorthEastLat){}
+		// 20 limited
+		for(int i=0; i<markerList.size(); i++){
+			JSONObject story = new JSONObject();
+			story.put("lat", markerList.get(i).getLatitude());
+			story.put("lng", markerList.get(i).getLongitude());
+			story.put("title", markerList.get(i).getStoryTitle());
+			story.put("id", markerList.get(i).getStoryId());
+			storyList.add(story);
 		}
-		
-		
-		storyList.add(story1);
-		storyList.add(story2);
-		storyList.add(story3);
 		
 		out.println(storyList);
 		db.closeConnection();

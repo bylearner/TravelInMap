@@ -1,21 +1,36 @@
 var map = null;
 var markers = [];
+var clientMarker = null;
 
 function initialize() {
 	var mapOptions = {
-		zoom: 6,
-		center: new google.maps.LatLng(40.0921964, 117.5671306),
+		zoom: 11,
+		center: new google.maps.LatLng(39.904211, 116.407395),
+		//center: searchLocation,
 		streetViewControl: false,
 		minZoom: 3
 	};
 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	/*
-	google.maps.event.addListener(map, 'click', function(event) {
-		addMarker(event.latLng);
-	});*/
+	search(searchText);
+	
+	clientMarker = new google.maps.Marker({
+		position: map.getCenter(),
+		map: map,
+		title: "your location",
+		icon: "image/PeopleIcon.jpg",
+		draggable: true
+	});
+
 	google.maps.event.addListener(map, 'idle', function(event) {
+		adjustClientMarkerLocation();
 		getAndShowMarkers();
 	});
+}
+
+function adjustClientMarkerLocation() {
+	if(!map.getBounds().contains(clientMarker.getPosition())){
+		clientMarker.setPosition(map.getCenter());
+	}
 }
 
 //Sets the map on all markers in the array.
@@ -41,16 +56,17 @@ function deleteMarkers() {
   markers = [];
 }
 
-function addMarker(location) {
+function addMarker(location,title,id) {
 	var marker = new google.maps.Marker({
 		position: location,
 		map: map,
-		title: "zjy",
+		title: "location",
 		icon: "image/regularMarker.png"
 	});
 	markers.push(marker);
+	var url = "Journey?storyId=" + id;
 	var infowindow = new google.maps.InfoWindow({
-	    content: "<a href='http://www.google.com'>1212</a>"
+	    content: "<a href='"+url+"' target= '_blank'>"+title+"</a>"
 	});
 	google.maps.event.addListener(marker, 'click', function() {
 	    infowindow.open(map,marker);
@@ -59,21 +75,18 @@ function addMarker(location) {
 
 function getAndShowMarkers() {
 	var boundNorthEastLat = map.getBounds().getNorthEast().lat();
-	var boundNorthEastLng = fixLongtitute(map.getBounds().getSouthWest().lng());
-	var boundSouthWestLat = map.getBounds().getNorthEast().lat();
+	var boundNorthEastLng = fixLongtitute(map.getBounds().getNorthEast().lng());
+	var boundSouthWestLat = map.getBounds().getSouthWest().lat();
 	var boundSouthWestLng = fixLongtitute(map.getBounds().getSouthWest().lng());
-	var boundCenterLat = map.getCenter().lat();
-	var boundCenterLng = fixLongtitute(map.getCenter().lng());
 	
 	var request = new XMLHttpRequest();
 	request.onreadystatechange=function(){
 		if (request.readyState==4 && request.status==200){
 			updateMarkers(request.responseText);
 		}
-	}
+	};
 	var url = "GetMarkerListByBound?"+"boundNorthEastLat="+boundNorthEastLat+"&boundNorthEastLng="+boundNorthEastLng
-									+"&boundSouthWestLat="+boundSouthWestLat+"&boundSouthWestLng="+boundSouthWestLng
-									+"&boundCenterLat="+boundCenterLat+"&boundCenterLng="+boundCenterLng;
+									+"&boundSouthWestLat="+boundSouthWestLat+"&boundSouthWestLng="+boundSouthWestLng;
 	request.open("GET",url,true);
 	request.send(null);
 }
@@ -86,8 +99,9 @@ function updateMarkers(responseText) {
     for(var i = 0; i < storylist.length; i++) {
     	var markLocation = new google.maps.LatLng(storylist[i].lat, storylist[i].lng);
     	if(map.getBounds().contains(markLocation)){
-    		addMarker(markLocation);
-            out += " title: " + storylist[i].title + "<br>";
+    		addMarker(markLocation, decodeURIComponent(storylist[i].title), storylist[i].id);
+    		var url = "Journey?storyId=" + storylist[i].id;
+            out += "<a href='"+url+"' target= '_blank'>"+decodeURIComponent(storylist[i].title)+"</><br>";
     	}
     }
     storylistDiv.innerHTML = out;
@@ -101,6 +115,24 @@ function fixLongtitute(passedLongtitute){
 		return fixLongtitute(passedLongtitute+360);
 	}
 	return passedLongtitute;
+}
+
+function search(searchText){
+	//var searchText = document.getElementById("searchText").value;
+	var geocoder = new google.maps.Geocoder();
+
+	geocoder.geocode( { 'address': searchText}, function(results, status) {
+		if(status == google.maps.GeocoderStatus.OK) {
+			map.setCenter(results[0].geometry.location);
+			//map.setZoom(11);
+			clientMarker.setCenter(results[0].geometry.location);
+			//alert(results[0].geometry.location);
+			//return results[0].geometry.location;
+		}
+		else{
+			//alert('Geocode was not successful for the following reason: ' + status);
+		}
+	});
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

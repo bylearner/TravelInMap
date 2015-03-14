@@ -15,6 +15,34 @@
     <description>This is the description of my J2EE component</description>
     <servlet-class>Servlet.GetMarkerListByBound</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>UploadStory</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.UploadStory</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Journey</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.Journey</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddStory</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.AddStory</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddComment</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.AddComment</servlet-class>
+  </servlet>
+
+
+
+
 
 
 
@@ -29,6 +57,22 @@
   <servlet-mapping>
     <servlet-name>GetMarkerListByBound</servlet-name>
     <url-pattern>/GetMarkerListByBound</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadStory</servlet-name>
+    <url-pattern>/UploadStory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Journey</servlet-name>
+    <url-pattern>/Journey</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddStory</servlet-name>
+    <url-pattern>/AddStory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddComment</servlet-name>
+    <url-pattern>/AddComment</url-pattern>
   </servlet-mapping>
 
 </web-app>

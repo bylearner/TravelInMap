@@ -1,8 +1,4 @@
 @CHARSET "UTF-8";
-#login {
-	height:550px;
-    width:400px;
-}
 #signup {
     line-height:45px;
 	font-size:20px;
@@ -13,23 +9,4 @@
 }
 #welcome {
     padding:10px; 
-}
-.logintext {
-	width: 200px;
-	height: 20px;
-}
-.loginbutton {
-	width: 150px;
-	height: 27px;
-}
-.signuptext {
-	width: 300px;
-	height: 30px;
-}
-.signupbutton {
-	width: 300px;
-	height: 40px;
-	color:white;
-	background-color: rgb(58,87,149);
-	font-size:20px;
 }

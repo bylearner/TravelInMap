@@ -2,20 +2,23 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import JavaBean.CommentBean;
 import JavaBean.DataBean;
+import JavaBean.StoryBean;
 
-public class SignUp extends HttpServlet {
+public class Journey extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public SignUp() {
+	public Journey() {
 		super();
 	}
 
@@ -40,19 +43,15 @@ public class SignUp extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		int storyID = Integer.parseInt(request.getParameter("storyId"));
+		DataBean db = new DataBean();
+		StoryBean story = db.getStoryByStoryId(storyID);
+		ArrayList<CommentBean> commentList = db.getCommentListByStoryId(storyID);
+		db.closeConnection();
+		request.setAttribute("storyID", storyID);
+		request.setAttribute("storyDetail", story);
+		request.setAttribute("commentList", commentList);
+		request.getRequestDispatcher("journey.jsp").forward(request, response);
 	}
 
 	/**
@@ -70,34 +69,17 @@ public class SignUp extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-
-		String name = request.getParameter("signupusername");
-		String password = request.getParameter("signuppassword");
-		String reEnterPassword = request.getParameter("signupreenterpassword");
-		String email = request.getParameter("signupemail");
-		String gender = request.getParameter("signupgender");
-		
-		DataBean db = new DataBean();
-		
-		boolean isValid = true;
-		if((name.equals(""))||(name==null)){isValid = false;}
-		else if((password.equals(""))||(name==null)){isValid = false;}
-		else if((reEnterPassword.equals(""))||(name==null)){isValid = false;}
-		else if(!password.equals(reEnterPassword)){isValid = false;}
-		else if((email.equals(""))||(name==null)){isValid = false;}
-		//else if((!gender.equals("male"))&&(!gender.equals("female"))){isValid = false;}
-		else if(!db.checkNewUserNameValid(name)){isValid = false;}
-		
-		if(isValid == false){
-			out.println("sign up fail");
-		}
-		else{
-			db.addNewUser(name, password, email);
-			out.println("sign up successful");
-			response.sendRedirect("navigator.jsp");
-		}
-		db.closeConnection();
-		
+		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
+		out.println("<HTML>");
+		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
+		out.println("  <BODY>");
+		out.print("    This is ");
+		out.print(this.getClass());
+		out.println(", using the POST method");
+		out.println("  </BODY>");
+		out.println("</HTML>");
+		out.flush();
+		out.close();
 	}
 
 	/**

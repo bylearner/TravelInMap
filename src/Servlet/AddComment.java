@@ -2,6 +2,8 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import JavaBean.DataBean;
 
-public class SignUp extends HttpServlet {
+public class AddComment extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public SignUp() {
+	public AddComment() {
 		super();
 	}
 
@@ -68,36 +70,15 @@ public class SignUp extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-
-		String name = request.getParameter("signupusername");
-		String password = request.getParameter("signuppassword");
-		String reEnterPassword = request.getParameter("signupreenterpassword");
-		String email = request.getParameter("signupemail");
-		String gender = request.getParameter("signupgender");
-		
+		int storyID = Integer.parseInt(request.getParameter("storyID"));
+		int providerId = Integer.parseInt(request.getParameter("providerId"));providerId=3;
+		String commentContent = request.getParameter("commentContent");
+		Date commentTime = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a");
 		DataBean db = new DataBean();
-		
-		boolean isValid = true;
-		if((name.equals(""))||(name==null)){isValid = false;}
-		else if((password.equals(""))||(name==null)){isValid = false;}
-		else if((reEnterPassword.equals(""))||(name==null)){isValid = false;}
-		else if(!password.equals(reEnterPassword)){isValid = false;}
-		else if((email.equals(""))||(name==null)){isValid = false;}
-		//else if((!gender.equals("male"))&&(!gender.equals("female"))){isValid = false;}
-		else if(!db.checkNewUserNameValid(name)){isValid = false;}
-		
-		if(isValid == false){
-			out.println("sign up fail");
-		}
-		else{
-			db.addNewUser(name, password, email);
-			out.println("sign up successful");
-			response.sendRedirect("navigator.jsp");
-		}
+		db.addNewComment(commentContent, ft.format(commentTime), storyID, providerId);
 		db.closeConnection();
-		
+		response.sendRedirect("Journey?storyId="+storyID);
 	}
 
 	/**

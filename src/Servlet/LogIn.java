@@ -1,7 +1,6 @@
 package Servlet;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,18 +38,10 @@ public class LogIn extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		System.out.println("12345");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
 		out.flush();
 		out.close();
 	}
@@ -69,28 +60,35 @@ public class LogIn extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 
-		String name = request.getParameter("loginusername");
+		String userType = request.getParameter("usertype");
+		String name = request.getParameter("loginusername");	
 		String password = request.getParameter("loginpassword");
-		
 		DataBean db = new DataBean();
 		
 		boolean isValid = true;
 		if((name.equals(""))||(name==null)){isValid = false;}
 		else if((password.equals(""))||(name==null)){isValid = false;}
+		if(!db.checkUserValid(name,password)){isValid = false;}
 		
-		if(db.checkUserValid(name,password)){
-			out.println("is a registed user");
-			//request.getRequestDispatcher("navigator.jsp").forward(request, response);
-			response.sendRedirect("navigator.jsp");
+		if(userType.equals("androidUser")){
+			if(isValid){
+				response.getOutputStream().print("OK");
+			}
+			else{
+				response.getOutputStream().print("notok");
+			}
+			//out.close();
 		}
-		else{
-			out.println("is not a registed user");
+		else if(userType.equals("webUser")){
+			if(isValid){
+				response.sendRedirect("navigator.jsp");
+			}
+			else{
+				response.sendRedirect("index.jsp");
+			}
 		}
 		db.closeConnection();
-		out.flush();
-		out.close();
 	}
 
 	/**

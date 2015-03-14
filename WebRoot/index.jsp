@@ -5,32 +5,34 @@
 <title>Welcome to Travel In Map</title>
 <link rel="stylesheet" href="style/main.css">
 <link rel="stylesheet" href="style/loginstyle.css">
-<script src="js/validate.js"></script>
+<script src="js/signupValidate.js"></script>
 </head>
 
-<body>
+<body style="background-color:rgb(222,222,222)">
 
 <div id="header">
 <form method="post" action="LogIn">
-    <a style="font-size:50px">TravelInMap</a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
-    <input type="text" name="loginusername" id="loginusername" class="logintext" placeholder="username"/>
-    <input type="password" name="loginpassword" id="loginpassword" class="logintext" placeholder="password"/>
-    <input type="submit" class="loginbutton" value="Log In"/>
+	<table>
+    <tr valign="middle">
+    <td><div><img src="image/logo.jpg" /></div></td>
+    <td><input type="hidden" name="usertype" value="webUser" /></td>
+	<td><input type="text" name="loginusername" id="loginusername" class="headertext" placeholder="username"/></td>
+    <td><input type="password" name="loginpassword" id="loginpassword" class="headertext" placeholder="password"/></td>
+    <td><input type="submit" class="headerbutton" value="Log In"/></td>
+    </tr>
+    </table>
 </form>
 </div><br>
 
 <div id="signup">
 <h1>Sign Up</h1>
 <form method="post" action="SignUp">
-    <input type="text" name="signupusername" id="signupusername" class="signuptext" placeholder="username" onBlur="validateUserName()"/><br>
-    <input type="text" name="signupemail" id="signupemail" class="signuptext" placeholder="email address" onBlur="validateEmail()"/><br>
-    <input type="password" name="signuppassword" id="signuppassword" class="signuptext" placeholder="password" onBlur="validatePassword()"/><br>
-    <input type="password" name="signupreenterpassword" id="signupreenterpassword" class="signuptext"
+    <input type="text" name="signupusername" id="signupusername" class="bodytext" placeholder="username" onBlur="validateUserName()"/><br>
+    <input type="text" name="signupemail" id="signupemail" class="bodytext" placeholder="email address" onBlur="validateEmail()"/><br>
+    <input type="password" name="signuppassword" id="signuppassword" class="bodytext" placeholder="password" onBlur="validatePassword()"/><br>
+    <input type="password" name="signupreenterpassword" id="signupreenterpassword" class="bodytext"
     placeholder="re-enter your password" onBlur="validateReEnterPassword()"/><br>
-    <input type="radio" name="signupgender" id="signupfemale" value="female"><em>female</em>&nbsp;&nbsp;&nbsp;
-    <input type="radio" name="signupgender" id="signupmale" value="male"><em>male</em><br>
-    <input type="submit" class="signupbutton" value="Sign Up"/>&nbsp;&nbsp;
+    <input type="button" class="bodybutton" value="Sign Up" onclick="signupValidate(this.form)"/>
 </form>
 </div>
 

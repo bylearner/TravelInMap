@@ -31,5 +31,8 @@ function validateReEnterPassword(){
 	else {reenterpassword.style.borderColor = "#FFFFFF";}
 	return isValid;
 }
-function validateGender(){
+function signupValidate(form){
+	if(validateUserName()&&validateEmail()&&validatePassword()&&validateReEnterPassword()){
+		form.submit();
+	}
 }

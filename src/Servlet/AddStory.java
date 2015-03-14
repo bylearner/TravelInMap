@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import JavaBean.DataBean;
 
-public class SignUp extends HttpServlet {
+public class AddStory extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public SignUp() {
+	public AddStory() {
 		super();
 	}
 
@@ -70,34 +70,17 @@ public class SignUp extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-
-		String name = request.getParameter("signupusername");
-		String password = request.getParameter("signuppassword");
-		String reEnterPassword = request.getParameter("signupreenterpassword");
-		String email = request.getParameter("signupemail");
-		String gender = request.getParameter("signupgender");
+		float locationLat = Float.parseFloat(request.getParameter("locationLat"));
+		float locationLng = Float.parseFloat(request.getParameter("locationLng"));
+		String title = request.getParameter("convertedtitle");
+		String date = request.getParameter("converteddate");
+		String duration = request.getParameter("convertedduration");
+		String content = request.getParameter("convertedcontent");
 		
 		DataBean db = new DataBean();
-		
-		boolean isValid = true;
-		if((name.equals(""))||(name==null)){isValid = false;}
-		else if((password.equals(""))||(name==null)){isValid = false;}
-		else if((reEnterPassword.equals(""))||(name==null)){isValid = false;}
-		else if(!password.equals(reEnterPassword)){isValid = false;}
-		else if((email.equals(""))||(name==null)){isValid = false;}
-		//else if((!gender.equals("male"))&&(!gender.equals("female"))){isValid = false;}
-		else if(!db.checkNewUserNameValid(name)){isValid = false;}
-		
-		if(isValid == false){
-			out.println("sign up fail");
-		}
-		else{
-			db.addNewUser(name, password, email);
-			out.println("sign up successful");
-			response.sendRedirect("navigator.jsp");
-		}
+		int newStoryID = db.addNewStory(1, title, content, date, locationLng, locationLat, duration);
 		db.closeConnection();
-		
+		response.sendRedirect("Journey?id="+newStoryID);
 	}
 
 	/**

@@ -8,7 +8,6 @@ public class UserBean implements Serializable{
 	private String name;
 	private String password;
 	private String email;
-	private String gender;
 	private String headPicture;
 	private String userType;
 	
@@ -22,8 +21,6 @@ public class UserBean implements Serializable{
 	public void setPassword(String password) {this.password = password;}
 	public String getEmail() {return email;}
 	public void setEmail(String email) {this.email = email;}
-	public String getGender() {return gender;}
-	public void setGender(String gender) {this.gender = gender;}
 	public String getHeadPicture() {return headPicture;}
 	public void setHeadPicture(String headPicture) {this.headPicture = headPicture;}
 	public String getUserType() {return userType;}
