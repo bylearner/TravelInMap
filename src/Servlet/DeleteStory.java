@@ -1,22 +1,21 @@
 package Servlet;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import JavaBean.DataBean;
-import JavaBean.UserBean;
 
-public class LogIn extends HttpServlet {
+public class DeleteStory extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public LogIn() {
+	public DeleteStory() {
 		super();
 	}
 
@@ -40,12 +39,12 @@ public class LogIn extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("12345");
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<HTML>");
-		out.flush();
-		out.close();
+
+		int storyId = Integer.parseInt(request.getParameter("storyId"));
+		DataBean db = new DataBean();
+		db.deleteStory(storyId);
+		db.closeConnection();
+		response.sendRedirect("YourJourneyList");
 	}
 
 	/**
@@ -61,42 +60,11 @@ public class LogIn extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-
-		String userType = request.getParameter("usertype");
-		String name = request.getParameter("loginusername");	
-		String password = request.getParameter("loginpassword");
+		int storyId = Integer.parseInt(request.getParameter("storyId"));
 		DataBean db = new DataBean();
-		
-		boolean isValid = true;
-		if((name.equals(""))||(name==null)){isValid = false;}
-		else if((password.equals(""))||(name==null)){isValid = false;}
-		int userId = db.checkUserValid(name,password);
-		if(userId==-1){isValid = false;}
-		
-		if(userType.equals("androidUser")){
-			if(isValid){
-				response.getOutputStream().print("ok");
-			}
-			else{
-				response.getOutputStream().print("notok");
-			}
-			//out.close();
-		}
-		else if(userType.equals("webUser")){
-			if(isValid){
-				HttpSession session =request.getSession();
-
-				UserBean user = db.getUserByUserId(userId);
-				session.setAttribute("user", user);
-
-				response.sendRedirect("navigator.jsp");
-			}
-			else{
-				response.sendRedirect("index.jsp");
-			}
-		}
+		db.deleteStory(storyId);
 		db.closeConnection();
+		response.sendRedirect("YourJourneyList");
 	}
 
 	/**

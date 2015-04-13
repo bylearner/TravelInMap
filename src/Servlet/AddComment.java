@@ -1,22 +1,23 @@
 package Servlet;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import JavaBean.DataBean;
-import JavaBean.UserBean;
 
-public class LogIn extends HttpServlet {
+public class AddComment extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public LogIn() {
+	public AddComment() {
 		super();
 	}
 
@@ -40,10 +41,18 @@ public class LogIn extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("12345");
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 		out.println("<HTML>");
+		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
+		out.println("  <BODY>");
+		out.print("    This is ");
+		out.print(this.getClass());
+		out.println(", using the GET method");
+		out.println("  </BODY>");
+		out.println("</HTML>");
 		out.flush();
 		out.close();
 	}
@@ -61,42 +70,15 @@ public class LogIn extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-
-		String userType = request.getParameter("usertype");
-		String name = request.getParameter("loginusername");	
-		String password = request.getParameter("loginpassword");
+		int storyID = Integer.parseInt(request.getParameter("storyID"));
+		int providerId = Integer.parseInt(request.getParameter("providerId"));
+		String commentContent = request.getParameter("commentContent");
+		Date commentTime = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a");
 		DataBean db = new DataBean();
-		
-		boolean isValid = true;
-		if((name.equals(""))||(name==null)){isValid = false;}
-		else if((password.equals(""))||(name==null)){isValid = false;}
-		int userId = db.checkUserValid(name,password);
-		if(userId==-1){isValid = false;}
-		
-		if(userType.equals("androidUser")){
-			if(isValid){
-				response.getOutputStream().print("ok");
-			}
-			else{
-				response.getOutputStream().print("notok");
-			}
-			//out.close();
-		}
-		else if(userType.equals("webUser")){
-			if(isValid){
-				HttpSession session =request.getSession();
-
-				UserBean user = db.getUserByUserId(userId);
-				session.setAttribute("user", user);
-
-				response.sendRedirect("navigator.jsp");
-			}
-			else{
-				response.sendRedirect("index.jsp");
-			}
-		}
+		db.addNewComment(commentContent, ft.format(commentTime), storyID, providerId);
 		db.closeConnection();
+		response.sendRedirect("Journey?storyId="+storyID);
 	}
 
 	/**

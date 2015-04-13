@@ -1,13 +1,11 @@
 @CHARSET "UTF-8";
 body {
-	background-color:rgb(237,240,245);
+	background-color:rgb(255,255,255);
 }
 #header {
     background-color:rgb(58,87,149);
     color:white;
-    padding:5px;
 	margin:0px;
-
 	font-size:20px;
 }
 #footer {
@@ -17,4 +15,56 @@ body {
     text-align:center;
     padding:5px; 
 }
-
+.headertext {
+	width: 200px;
+	height: 20px;
+}
+.longheadertext {
+	width: 400px;
+	height: 20px;
+}
+.headerbutton {
+	width: 150px;
+	height: 27px;
+}
+.bodytext {
+	width: 300px;
+	height: 30px;
+}
+.longbodytext {
+	width: 700px;
+	height: 30px;
+}
+.bodybutton {
+	width: 305px;
+	height: 40px;
+	color:white;
+	background-color: rgb(58,87,149);
+	font-size:20px;
+}
+.smallbodybutton {
+	width: 105px;
+	height: 30px;
+	color:white;
+	background-color: rgb(58,87,149);
+	font-size:20px;
+}
+a {
+	color: #000000;
+	text-decoration:none;
+	font-size: medium;
+}
+table {
+	border-collapse:collapse;
+}
+li.storylist {
+	height: 40px;
+	border: solid 1px rgb(58,87,149);
+	color: #000000;
+	text-decoration:none;
+	font-size: medium;
+}
+li.storylist:hover {
+	background-color: rgb(58,87,149);
+	height: 60px;
+}

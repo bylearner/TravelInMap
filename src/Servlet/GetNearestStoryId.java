@@ -1,22 +1,24 @@
 package Servlet;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 
 import JavaBean.DataBean;
-import JavaBean.UserBean;
+import JavaBean.MarkerBean;
 
-public class LogIn extends HttpServlet {
+public class GetNearestStoryId extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public LogIn() {
+	public GetNearestStoryId() {
 		super();
 	}
 
@@ -40,10 +42,18 @@ public class LogIn extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("12345");
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 		out.println("<HTML>");
+		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
+		out.println("  <BODY>");
+		out.print("    This is ");
+		out.print(this.getClass());
+		out.println(", using the GET method");
+		out.println("  </BODY>");
+		out.println("</HTML>");
 		out.flush();
 		out.close();
 	}
@@ -61,41 +71,23 @@ public class LogIn extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-
-		String userType = request.getParameter("usertype");
-		String name = request.getParameter("loginusername");	
-		String password = request.getParameter("loginpassword");
+		float clientLat = Float.parseFloat(request.getParameter("lat"));
+		float clientLng = Float.parseFloat(request.getParameter("lng"));
+		
 		DataBean db = new DataBean();
-		
-		boolean isValid = true;
-		if((name.equals(""))||(name==null)){isValid = false;}
-		else if((password.equals(""))||(name==null)){isValid = false;}
-		int userId = db.checkUserValid(name,password);
-		if(userId==-1){isValid = false;}
-		
-		if(userType.equals("androidUser")){
-			if(isValid){
-				response.getOutputStream().print("ok");
-			}
-			else{
-				response.getOutputStream().print("notok");
-			}
-			//out.close();
-		}
-		else if(userType.equals("webUser")){
-			if(isValid){
-				HttpSession session =request.getSession();
-
-				UserBean user = db.getUserByUserId(userId);
-				session.setAttribute("user", user);
-
-				response.sendRedirect("navigator.jsp");
-			}
-			else{
-				response.sendRedirect("index.jsp");
-			}
-		}
+		MarkerBean nearestMarker = db.getNearestMarker(clientLat, clientLng);
+		double storyLat=nearestMarker.getLatitude();
+		double storyLng=nearestMarker.getLongitude();
+		double latDistance=Math.abs(storyLat-clientLat);
+		double lngDistance=Math.abs(storyLng-clientLng);
+		double distance = Math.sqrt(latDistance*latDistance + lngDistance*lngDistance)*40000/360;
+		JSONObject JSONMarker = new JSONObject();
+		JSONMarker.put("title", nearestMarker.getStoryTitle());
+		JSONMarker.put("id", nearestMarker.getStoryId());
+		JSONMarker.put("distance", distance);
+		//System.out.println(JSONMarker.toString());
+		response.getOutputStream().print(JSONMarker.toString());
+		//System.out.print(nearestStoryId);
 		db.closeConnection();
 	}
 

@@ -8,8 +8,7 @@ public class JourneyBean implements Serializable{
 	private int id;
 	private int providerId;
 	private String title;
-	private ArrayList<Integer> storyIdList;
-
+	private ArrayList<StoryBean> storyList;
 	public JourneyBean() {}
 	
 	public int getId() {return id;}
@@ -18,7 +17,7 @@ public class JourneyBean implements Serializable{
 	public void setProviderId(int providerId) {this.providerId = providerId;}
 	public String getTitle() {return title;}
 	public void setTitle(String title) {this.title = title;}
-	public ArrayList<Integer> getStoryIdList() {return storyIdList;}
-	public void setStoryIdList(ArrayList<Integer> storyIdList) {this.storyIdList = storyIdList;}
+	public ArrayList<StoryBean> getStoryList() {return storyList;}
+	public void setStoryList(ArrayList<StoryBean> storyList) {this.storyList = storyList;}
 	
 }

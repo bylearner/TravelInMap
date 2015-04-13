@@ -1,11 +1,12 @@
 <%@ page language="java" import="JavaBean.*" pageEncoding="UTF-8"%>
+<%@ page import="java.net.*" %>
 <%
 if((UserBean)session.getAttribute("user")==null){
 	response.sendRedirect("index.jsp");
 	return;
 }
 %>
-<% String journeyId = (String) request.getAttribute("journeyId"); %>
+<% StoryBean story = (StoryBean) request.getAttribute("story"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +17,7 @@ if((UserBean)session.getAttribute("user")==null){
 <script src="js/editor.js"></script>
 <script src="http://maps.google.cn/maps/api/js?v=3.exp&sensor=true"></script>
 <script src="js/selectlocationmap.js"></script>
-<script src="js/selectlocationmap.js"></script>
-<script src="ajaxfileupload.js"></script>
+<script src="js/storyValidate.js"></script>
 </head>
 
 <body>
@@ -44,7 +44,7 @@ if((UserBean)session.getAttribute("user")==null){
     <div>Step Two: Story Title</div>
 </td>
 <td width="1000">
-	<br><input type="text" id="title" name="title" class="longbodytext"/><br><br>
+	<br><input type="text" id="title" name="title" class="longbodytext" value="<% out.print(URLDecoder.decode(story.getTitle())); %>"/><br><br>
 </td>
 </tr>
 
@@ -53,7 +53,7 @@ if((UserBean)session.getAttribute("user")==null){
     <div>Step Three: Story Date</div>
 </td>
 <td width="1000">
-	<input type="text" id="date" name="date" class="bodytext"/>
+	<input type="text" id="date" name="date" class="bodytext" value="<% out.print(URLDecoder.decode(story.getDate())); %>"/>
 </td>
 </tr>
 
@@ -62,7 +62,7 @@ if((UserBean)session.getAttribute("user")==null){
     <br><br><div>Step Four: Story Duration</div><br><br>
 </td>
 <td width="1000">
-	<input type="text" id="duration" name="duration" class="bodytext"/>Hours
+	<input type="text" id="duration" name="duration" class="bodytext" value="<% out.print(URLDecoder.decode(story.getDuration())); %>"/>Hours
 </td>
 </tr>
 
@@ -72,12 +72,8 @@ if((UserBean)session.getAttribute("user")==null){
 </td>
 <td width="1000" >
 	<input type="button" value="insert online picture" onClick="uploadPicture()"/>
-
-	<form method="post" action="uploadPicture" enctype="multipart/form-data">
-	<input type="file" id="pic">
-	<input type="submit" name="upload">
-	</form>
-	<div id="storyEditField" contenteditable="true" style="border: 1px solid;"><br><br><br><br><br></div>
+	<input type="file" name="pic"/>
+	<div id="storyEditField" contenteditable="true" style="border: 1px solid;"><% out.print(URLDecoder.decode(story.getContent(),"utf-8")); %></div>
 	
 </td>
 </tr>
@@ -88,8 +84,9 @@ if((UserBean)session.getAttribute("user")==null){
 </td>
 <td width="1000">
 	<br>
-	<form method="post" action="AddStory">
-	<input type="hidden" id="journeyId" name="journeyId" value="<% out.print(journeyId); %>"/>
+	<form method="post" action="UpdateStory">
+	<input type="hidden" id="storyId" name="storyId" value="<% out.print(story.getId()); %>"/>
+	<input type="hidden" id="journeyId" name="journeyId" value="<% out.print(story.getJourneyId()); %>"/>
 	<input type="hidden" id="locationLat" name="locationLat"/>
     <input type="hidden" id="locationLng" name="locationLng"/>
     <input type="hidden" id="convertedtitle" name="convertedtitle"/>

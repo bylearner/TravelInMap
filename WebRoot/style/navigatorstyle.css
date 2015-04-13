@@ -5,14 +5,10 @@
     width:500px;
     padding:5px;
 	float:right;
-	border:dotted;
-}
-
-#mapcontent {
 }
 
 #map-canvas {
-	height: 550px;
+	height: 560px;
 	margin: 0px;
-	padding: 0px;
+	padding: 0px;border:medium;
 }

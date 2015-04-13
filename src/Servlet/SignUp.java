@@ -84,20 +84,20 @@ public class SignUp extends HttpServlet {
 		else if((password.equals(""))||(name==null)){isValid = false;}
 		else if((reEnterPassword.equals(""))||(name==null)){isValid = false;}
 		else if(!password.equals(reEnterPassword)){isValid = false;}
-		else if((email.equals(""))||(name==null)){isValid = false;}email.indexOf("@")>0
-		else if((!gender.equals("male"))&&(!gender.equals("female"))){isValid = false;}
+		else if((email.equals(""))||(name==null)){isValid = false;}
+		//else if((!gender.equals("male"))&&(!gender.equals("female"))){isValid = false;}
 		else if(!db.checkNewUserNameValid(name)){isValid = false;}
 		
 		if(isValid == false){
 			out.println("sign up fail");
 		}
 		else{
-			db.addNewUser(name, password, email, gender);
+			db.addNewUser(name, password, email);
 			out.println("sign up successful");
+			response.sendRedirect("index.jsp");
 		}
 		db.closeConnection();
-		out.flush();
-		out.close();
+		
 	}
 
 	/**

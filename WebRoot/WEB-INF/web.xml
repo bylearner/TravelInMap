@@ -15,6 +15,104 @@
     <description>This is the description of my J2EE component</description>
     <servlet-class>Servlet.GetMarkerListByBound</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>UploadStory</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.UploadStory</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Journey</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.Journey</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddStory</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.AddStory</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddComment</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.AddComment</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SignOut</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.SignOut</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>YourJourneyList</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.YourJourneyList</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>NewStory</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.NewStory</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddJourney</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.AddJourney</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetNearestStoryId</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.GetNearestStoryId</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetStorySimple</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.GetStorySimple</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Edit</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.Edit</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UpdateStory</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.UpdateStory</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DeleteStory</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.DeleteStory</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UploadPicture</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>Servlet.UploadPicture</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29,6 +127,62 @@
   <servlet-mapping>
     <servlet-name>GetMarkerListByBound</servlet-name>
     <url-pattern>/GetMarkerListByBound</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadStory</servlet-name>
+    <url-pattern>/UploadStory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Journey</servlet-name>
+    <url-pattern>/Journey</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddStory</servlet-name>
+    <url-pattern>/AddStory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddComment</servlet-name>
+    <url-pattern>/AddComment</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SignOut</servlet-name>
+    <url-pattern>/SignOut</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>YourJourneyList</servlet-name>
+    <url-pattern>/YourJourneyList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NewStory</servlet-name>
+    <url-pattern>/NewStory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddJourney</servlet-name>
+    <url-pattern>/AddJourney</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetNearestStoryId</servlet-name>
+    <url-pattern>/GetNearestStoryId</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetStorySimple</servlet-name>
+    <url-pattern>/GetStorySimple</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Edit</servlet-name>
+    <url-pattern>/Edit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateStory</servlet-name>
+    <url-pattern>/UpdateStory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteStory</servlet-name>
+    <url-pattern>/DeleteStory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadPicture</servlet-name>
+    <url-pattern>/UploadPicture</url-pattern>
   </servlet-mapping>
 
 </web-app>
