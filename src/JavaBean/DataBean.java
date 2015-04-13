@@ -155,6 +155,7 @@ public class DataBean implements Serializable{
 		return journey;
 	}
 	
+<<<<<<< HEAD
 	public ArrayList<JourneyBean> getJourneyListByProviderId(int passedJourneyProviderId){
 		ArrayList<JourneyBean> journeyList = new ArrayList<JourneyBean>();
 		try {
@@ -172,6 +173,8 @@ public class DataBean implements Serializable{
 		return journeyList;
 	}
 	
+=======
+>>>>>>> origin/master
 	public int addNewStory(int journeyId, String passedTitle, String passedContent, String passedDate, double passedLongitude, double passedLatitude, String passedDuration){
     	int newStoryID = 0;
 		try {
@@ -183,6 +186,7 @@ public class DataBean implements Serializable{
             if (result.next()) {    
             	newStoryID = result.getInt(1);  
             }
+<<<<<<< HEAD
 			statement.close();
 		}
     	catch (Exception e) {e.printStackTrace();}
@@ -197,9 +201,12 @@ public class DataBean implements Serializable{
 			ResultSet result = statement.getGeneratedKeys();    
             if (result.next()) {      
             }
+=======
+>>>>>>> origin/master
 			statement.close();
 		}
     	catch (Exception e) {e.printStackTrace();}
+    	return newStoryID;
 	}
 	
 	public StoryBean getStoryByStoryId(int passedStoryId){
@@ -331,8 +338,12 @@ public class DataBean implements Serializable{
 			//String sql = "SELECT * FROM comment WHERE story_id=\""+passedStoryId+"\" ORDER BY comment_time";
 			// SELECT comment.comment_content, comment.comment_time, user.user_name, user.user_picture_url FROM comment, user WHERE comment.comment_provider_id = user.user_id
 			// And
+<<<<<<< HEAD
 			String sql = "SELECT a.story_id, a.comment_content, a.comment_time, b.user_name, b.user_picture_url "
 					+ "FROM comment a, user b WHERE a.comment_provider_id = b.user_id ORDER BY a.comment_id";
+=======
+			String sql = "SELECT a.story_id, a.comment_content, a.comment_time, b.user_name, b.user_picture_url FROM comment a, user b WHERE a.comment_provider_id = b.user_id";
+>>>>>>> origin/master
 			
 			ResultSet result = statement.executeQuery(sql);
 			while(result.next()){
@@ -342,6 +353,17 @@ public class DataBean implements Serializable{
 					comment.setTime(result.getString("comment_time"));
 					comment.setProviderName(result.getString("user_name"));
 					comment.setProviderPicture(result.getString("user_picture_url"));
+<<<<<<< HEAD
+=======
+					/*
+					CommentBean comment = new CommentBean();
+					comment.setId(result.getInt("comment_id"));
+					comment.setContent(result.getString("comment_content"));
+					comment.setTime(result.getString("comment_time"));
+					comment.setStoryId(result.getInt("story_id"));
+					comment.setProviderId(result.getInt("comment_provider_id"));
+					*/
+>>>>>>> origin/master
 					commentList.add(comment);
 				}
 			}

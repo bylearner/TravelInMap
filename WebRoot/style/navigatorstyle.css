@@ -5,6 +5,10 @@
     width:500px;
     padding:5px;
 	float:right;
+<<<<<<< HEAD
+=======
+	border:dotted;
+>>>>>>> origin/master
 }
 
 #map-canvas {

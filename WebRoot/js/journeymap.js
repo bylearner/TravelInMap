@@ -1,4 +1,5 @@
 var map = null;
+<<<<<<< HEAD
 var storyIds = [];
 var storyTitles = [];
 var locations = [];
@@ -6,11 +7,19 @@ var locations = [];
 function initialize() {
 	var mapOptions = {
 		zoom: 14,
+=======
+var markers = [];
+
+function initialize() {
+	var mapOptions = {
+		zoom: 6,
+>>>>>>> origin/master
 		center: new google.maps.LatLng(40.0921964, 117.5671306),
 		streetViewControl: false,
 		minZoom: 3
 	};
 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+<<<<<<< HEAD
 	addMarkers();
 }
 
@@ -43,4 +52,8 @@ function addMarker(location,title,id,index) {
 }
 
 
+=======
+}
+
+>>>>>>> origin/master
 google.maps.event.addDomListener(window, 'load', initialize);

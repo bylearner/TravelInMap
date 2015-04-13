@@ -94,7 +94,11 @@ public class SignUp extends HttpServlet {
 		else{
 			db.addNewUser(name, password, email);
 			out.println("sign up successful");
+<<<<<<< HEAD
 			response.sendRedirect("index.jsp");
+=======
+			response.sendRedirect("navigator.jsp");
+>>>>>>> origin/master
 		}
 		db.closeConnection();
 		

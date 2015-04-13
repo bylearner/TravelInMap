@@ -1,8 +1,11 @@
 var map = null;
 var markers = [];
 var clientMarker = null;
+<<<<<<< HEAD
 
 var storylist = "";
+=======
+>>>>>>> origin/master
 
 function initialize() {
 	var mapOptions = {
@@ -22,11 +25,15 @@ function initialize() {
 		icon: "image/PeopleIcon.jpg",
 		draggable: true
 	});
+<<<<<<< HEAD
 	
 	google.maps.event.addListener(clientMarker, 'drag', function(event) {
 		 updateStoryList();
 	});
 	
+=======
+
+>>>>>>> origin/master
 	google.maps.event.addListener(map, 'idle', function(event) {
 		adjustClientMarkerLocation();
 		getAndShowMarkers();
@@ -110,6 +117,7 @@ function updateStoryList() {
     	var markLocation = new google.maps.LatLng(storylist[i].lat, storylist[i].lng);
     	if(map.getBounds().contains(markLocation)){
     		addMarker(markLocation, decodeURIComponent(storylist[i].title), storylist[i].id);
+<<<<<<< HEAD
     		storyurltitles.push("<a href='"+"Journey?storyId=" + storylist[i].id+"' target= '_blank'>"+decodeURIComponent(storylist[i].title));
     		distances.push(getDistance(markLocation,clientMarker.getPosition()));
     	}
@@ -119,6 +127,10 @@ function updateStoryList() {
     for(var i = 0; i < sorteddistances.length; i++) {
     	for(var j = 0; j < distances.length; j++) {
     		if(distances[j]==sorteddistances[i]){out +="<li class='storylist'>"+storyurltitles[j];break;}
+=======
+    		var url = "Journey?storyId=" + storylist[i].id;
+            out += "<a href='"+url+"' target= '_blank'>"+decodeURIComponent(storylist[i].title)+"</><br>";
+>>>>>>> origin/master
     	}
     	out += "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDistance: "+ sorteddistances[i]+"Km</a></li>";
     }
@@ -154,6 +166,7 @@ function search(searchText){
 	});
 }
 
+<<<<<<< HEAD
 function getDistance(locationone, locationtwo){
 	var latDistance = Math.abs(locationone.lat() - locationtwo.lat());
 	var lngDistance = Math.abs(locationone.lng() - locationtwo.lng());
@@ -162,4 +175,6 @@ function getDistance(locationone, locationtwo){
 	return distance;
 }
 
+=======
+>>>>>>> origin/master
 google.maps.event.addDomListener(window, 'load', initialize);

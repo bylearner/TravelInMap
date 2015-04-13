@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" import="JavaBean.*" pageEncoding="UTF-8"%>
 <%
 if((UserBean)session.getAttribute("user")==null){
@@ -5,6 +6,8 @@ if((UserBean)session.getAttribute("user")==null){
 	return;
 }
 %>
+=======
+>>>>>>> origin/master
 <%
 String searchText = (String)request.getParameter("searchText");
 if(searchText==null){searchText = "Beijing";}
@@ -38,7 +41,11 @@ if(searchText==null){searchText = "Beijing";}
 
 <td width="382">
 <div id="sidebar">
+<<<<<<< HEAD
     <div style="text-align:center;font-size: 30px;color: rgb(58,87,149)">Stories near you</div>
+=======
+    storylist<br>
+>>>>>>> origin/master
     <div id="storylist">story link will appear here</div>
 </div>
 </td>

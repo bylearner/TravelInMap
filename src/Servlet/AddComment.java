@@ -71,7 +71,11 @@ public class AddComment extends HttpServlet {
 			throws ServletException, IOException {
 
 		int storyID = Integer.parseInt(request.getParameter("storyID"));
+<<<<<<< HEAD
 		int providerId = Integer.parseInt(request.getParameter("providerId"));
+=======
+		int providerId = Integer.parseInt(request.getParameter("providerId"));providerId=3;
+>>>>>>> origin/master
 		String commentContent = request.getParameter("commentContent");
 		Date commentTime = new Date();
 		SimpleDateFormat ft = new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a");

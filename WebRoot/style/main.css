@@ -42,6 +42,7 @@ body {
 	background-color: rgb(58,87,149);
 	font-size:20px;
 }
+<<<<<<< HEAD
 .smallbodybutton {
 	width: 105px;
 	height: 30px;
@@ -68,3 +69,6 @@ li.storylist:hover {
 	background-color: rgb(58,87,149);
 	height: 60px;
 }
+=======
+
+>>>>>>> origin/master

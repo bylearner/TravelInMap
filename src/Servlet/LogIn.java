@@ -71,12 +71,20 @@ public class LogIn extends HttpServlet {
 		boolean isValid = true;
 		if((name.equals(""))||(name==null)){isValid = false;}
 		else if((password.equals(""))||(name==null)){isValid = false;}
+<<<<<<< HEAD
 		int userId = db.checkUserValid(name,password);
 		if(userId==-1){isValid = false;}
 		
 		if(userType.equals("androidUser")){
 			if(isValid){
 				response.getOutputStream().print("ok");
+=======
+		if(!db.checkUserValid(name,password)){isValid = false;}
+		
+		if(userType.equals("androidUser")){
+			if(isValid){
+				response.getOutputStream().print("OK");
+>>>>>>> origin/master
 			}
 			else{
 				response.getOutputStream().print("notok");
@@ -85,11 +93,14 @@ public class LogIn extends HttpServlet {
 		}
 		else if(userType.equals("webUser")){
 			if(isValid){
+<<<<<<< HEAD
 				HttpSession session =request.getSession();
 
 				UserBean user = db.getUserByUserId(userId);
 				session.setAttribute("user", user);
 
+=======
+>>>>>>> origin/master
 				response.sendRedirect("navigator.jsp");
 			}
 			else{

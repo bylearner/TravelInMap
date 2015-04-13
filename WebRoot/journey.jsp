@@ -1,4 +1,5 @@
 <%@ page language="java" import="JavaBean.*" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%
 if((UserBean)session.getAttribute("user")==null){
 	response.sendRedirect("index.jsp");
@@ -11,6 +12,11 @@ UserBean user = (UserBean)session.getAttribute("user");
 <% StoryBean story = (StoryBean)request.getAttribute("story"); %>
 <% JourneyBean journey = (JourneyBean)request.getAttribute("journey"); %>
 <% ArrayList<StoryBean> storyList = journey.getStoryList(); %>
+=======
+<%@ page import="java.util.ArrayList" %>
+<% int storyID = (Integer)request.getAttribute("storyID"); %>
+<% StoryBean story = (StoryBean)request.getAttribute("storyDetail"); %>
+>>>>>>> origin/master
 <% ArrayList<CommentBean> commentList = (ArrayList<CommentBean>)request.getAttribute("commentList"); %>
 <!DOCTYPE html>
 <html>
@@ -26,7 +32,11 @@ UserBean user = (UserBean)session.getAttribute("user");
 </head>
 
 <body>
+<<<<<<< HEAD
 <table width="100%" border="0">
+=======
+<table width="100%" border="1">
+>>>>>>> origin/master
 <tr>
 <td colspan="2">
 <jsp:include page="header.jsp" flush="true" />
@@ -34,6 +44,7 @@ UserBean user = (UserBean)session.getAttribute("user");
 </tr>
 
 <tr>
+<<<<<<< HEAD
 <td rowspan="6" width="auto" valign="top">
 	<h3>In Journey "<% out.print(URLDecoder.decode(journey.getTitle(),"utf-8"));%>"</h3>
 	<h3>There is <% out.print(storyList.size()); %> stories.</h3>
@@ -79,12 +90,23 @@ UserBean user = (UserBean)session.getAttribute("user");
 	<%
 	}
 	%>
+=======
+<td rowspan="5" width="auto">
+    <div id="storylist">story list will appear here</div>
+</td>
+<td width="1000">
+	<div id="map-canvas"></div>
+>>>>>>> origin/master
 </td>
 </tr>
 
 <tr>
 <td width="1000">
+<<<<<<< HEAD
 	<br><h3 id="storytitle">story title will appear here</h3>
+=======
+	<div id="storytitle">story title will appear here</div>
+>>>>>>> origin/master
 	<script>
 	var title = "<% out.print(story.getTitle()); %>";
 	title = decodeURIComponent(title);
@@ -95,6 +117,7 @@ UserBean user = (UserBean)session.getAttribute("user");
 
 <tr>
 <td width="1000">
+<<<<<<< HEAD
 	<a id="storydate">Date: <% out.print(story.getDate()); %></a>
 </td>
 </tr>
@@ -103,6 +126,12 @@ UserBean user = (UserBean)session.getAttribute("user");
 	Duration:
 	<a id="storyduration">story duration will appear here</a>
 	Hours
+=======
+	<em id="storydate">Date: <% out.print(story.getDate()); %></em>
+	<em>Duration:</em>
+	<em id="storyduration">story duration will appear here</em>
+	<em>Hours</em>
+>>>>>>> origin/master
 	<script>
 	var duration = "<% out.print(story.getDuration()); %>";
 	duration = decodeURIComponent(duration);
@@ -113,7 +142,11 @@ UserBean user = (UserBean)session.getAttribute("user");
 
 <tr>
 <td width="1000" >
+<<<<<<< HEAD
 	<br><div id="storycontent" style="border: 1px solid;">story content will appear here</div><br>
+=======
+	<div id="storycontent">story content will appear here</div>
+>>>>>>> origin/master
 	<script>
 	var content = "<% out.print(story.getContent()); %>";
 	content = decodeURIComponent(content);
@@ -125,11 +158,17 @@ UserBean user = (UserBean)session.getAttribute("user");
 <tr>
 <td width="1000">
 	<div id="comment"></div>
+<<<<<<< HEAD
 	Comment:
 	<table border="1">
 		<tr>
 		<td>providerName</td><td>ProviderPicture</td><td>content</td><td>time</td>
 		
+=======
+	<table border="1">
+		<tr>
+		<td>providerName</td><td>ProviderPicture</td><td>content</td><td>time</td>
+>>>>>>> origin/master
 		</tr>
 		<%
 		for(int i=0; i<commentList.size(); i++){
@@ -137,7 +176,11 @@ UserBean user = (UserBean)session.getAttribute("user");
 			out.println("<td>" + commentList.get(i).getProviderName() + "</td>");
 			//String url = "<td><img src='"+commentList.get(i).getProviderPicture()+"' height='30px' width='30px' /></td>";
 			out.println("<td><img src='"+commentList.get(i).getProviderPicture()+"' height='30px' width='30px' /></td>");
+<<<<<<< HEAD
 			out.println("<td name='commentContent' style='word-break:break-all;'>" + commentList.get(i).getContent() + "</td>");
+=======
+			out.println("<td name='commentContent'>" + commentList.get(i).getContent() + "</td>");
+>>>>>>> origin/master
 			out.println("<td>" + commentList.get(i).getTime() + "</td>");
 			out.println("</tr>");
 		}
@@ -150,10 +193,16 @@ UserBean user = (UserBean)session.getAttribute("user");
 		commentContentList[i].innerHTML = decodeURIComponent(commentContentList[i].innerHTML);
 	}
 	</script>
+<<<<<<< HEAD
 	<br>
 	<form method="post" action="AddComment">
 		<input type="hidden" id="storyID" name="storyID" value="<% out.print(story.getId()); %>" />
 		<input type="hidden" id="providerId" name="providerId" value="<% out.print(user.getId()); %>" />
+=======
+	<form method="post" action="AddComment">
+		<input type="hidden" id="storyID" name="storyID" value="<% out.print(storyID); %>" />
+		<input type="hidden" id="providerId" name="providerId" value="1" />
+>>>>>>> origin/master
 		<textarea rows="3" cols="50" id="commentContent" name="commentContent"></textarea>
 		<input type="button" value="Add Comment" onClick="commentValidate(this.form)"/>
 	</form>

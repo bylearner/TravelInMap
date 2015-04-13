@@ -39,6 +39,7 @@
     <description>This is the description of my J2EE component</description>
     <servlet-class>Servlet.AddComment</servlet-class>
   </servlet>
+<<<<<<< HEAD
   <servlet>
     <servlet-name>SignOut</servlet-name>
     <display-name>This is the display name of my J2EE component</display-name>
@@ -109,6 +110,8 @@
 
 
 
+=======
+>>>>>>> origin/master
 
 
 
@@ -144,6 +147,7 @@
     <servlet-name>AddComment</servlet-name>
     <url-pattern>/AddComment</url-pattern>
   </servlet-mapping>
+<<<<<<< HEAD
   <servlet-mapping>
     <servlet-name>SignOut</servlet-name>
     <url-pattern>/SignOut</url-pattern>
@@ -184,5 +188,7 @@
     <servlet-name>UploadPicture</servlet-name>
     <url-pattern>/UploadPicture</url-pattern>
   </servlet-mapping>
+=======
+>>>>>>> origin/master
 
 </web-app>

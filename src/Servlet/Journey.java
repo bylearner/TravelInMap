@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 import javax.servlet.http.HttpSession;
 
 import JavaBean.CommentBean;
@@ -15,6 +16,12 @@ import JavaBean.DataBean;
 import JavaBean.JourneyBean;
 import JavaBean.StoryBean;
 import JavaBean.UserBean;
+=======
+
+import JavaBean.CommentBean;
+import JavaBean.DataBean;
+import JavaBean.StoryBean;
+>>>>>>> origin/master
 
 public class Journey extends HttpServlet {
 
@@ -45,6 +52,7 @@ public class Journey extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+<<<<<<< HEAD
 		
 		HttpSession session =request.getSession();
 		UserBean user = (UserBean) session.getAttribute("user");
@@ -60,6 +68,16 @@ public class Journey extends HttpServlet {
 		db.closeConnection();
 		request.setAttribute("story", story);
 		request.setAttribute("journey", journey);
+=======
+
+		int storyID = Integer.parseInt(request.getParameter("storyId"));
+		DataBean db = new DataBean();
+		StoryBean story = db.getStoryByStoryId(storyID);
+		ArrayList<CommentBean> commentList = db.getCommentListByStoryId(storyID);
+		db.closeConnection();
+		request.setAttribute("storyID", storyID);
+		request.setAttribute("storyDetail", story);
+>>>>>>> origin/master
 		request.setAttribute("commentList", commentList);
 		request.getRequestDispatcher("journey.jsp").forward(request, response);
 	}

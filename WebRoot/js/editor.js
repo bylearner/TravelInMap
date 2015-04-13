@@ -17,9 +17,14 @@ var value= event.keyCode;
 }
 */
 function uploadPicture(){
+<<<<<<< HEAD
 	var pictureUrl = prompt("online picture url:","");
 	editor.innerHTML = editor.innerHTML+"<br>"
 	+"<img src=\""+pictureUrl+"\" height=\"200px\"/>"+"<div></div>";
+=======
+	editor.innerHTML = editor.innerHTML+"<br>"
+	+"<img src=\"http://www.baidu.com/img/bdlogo.png\" width=\"30px\" height=\"40px\"/>"+"<div></div>";
+>>>>>>> origin/master
 
 }
 

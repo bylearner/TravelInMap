@@ -68,7 +68,12 @@ public class AddStory extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+<<<<<<< HEAD
 		int journeyId = Integer.parseInt(request.getParameter("journeyId"));
+=======
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+>>>>>>> origin/master
 		float locationLat = Float.parseFloat(request.getParameter("locationLat"));
 		float locationLng = Float.parseFloat(request.getParameter("locationLng"));
 		String title = request.getParameter("convertedtitle");
@@ -77,9 +82,15 @@ public class AddStory extends HttpServlet {
 		String content = request.getParameter("convertedcontent");
 		
 		DataBean db = new DataBean();
+<<<<<<< HEAD
 		int newStoryID = db.addNewStory(journeyId, title, content, date, locationLng, locationLat, duration);
 		db.closeConnection();
 		response.sendRedirect("Journey?storyId="+newStoryID);
+=======
+		int newStoryID = db.addNewStory(1, title, content, date, locationLng, locationLat, duration);
+		db.closeConnection();
+		response.sendRedirect("Journey?id="+newStoryID);
+>>>>>>> origin/master
 	}
 
 	/**
